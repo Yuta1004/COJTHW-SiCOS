@@ -1,16 +1,26 @@
 IMAGE := riscv-toolchain:rv32i
 
-OUT_FILE := myprogram
+OUT_FILE := out
 LD_FILE := link_settings.ld
 
-BIN_PATH := /opt/riscv/bin
-GCC := $(BIN_PATH)/riscv32-unknown-elf-gcc
+GCC := /opt/riscv/bin/riscv32-unknown-elf-gcc
+RAW_GENERATOR := python3 /workdir/raw_generator.py
 
 compile: *.c
-	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) $(GCC) \
-		-o $(OUT_FILE) \
-		-T $(LD_FILE) \
-		$^
+	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
+		$(GCC) \
+			-o out.elf.tmp \
+			-T $(LD_FILE) \
+			$^ && \
+		$(RAW_GENERATOR) \
+			$(OUT_FILE) \
+			out.elf.tmp && \
+		rm \
+			out.elf.tmp \
+	"
+
+run-shell:
+	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE)
 
 build-image:
 	docker build -t $(IMAGE) .
