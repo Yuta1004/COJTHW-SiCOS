@@ -11,7 +11,10 @@ compile: *.c
 		$(GCC) \
 			-o out.elf.tmp \
 			-T $(LD_FILE) \
-			$^ && \
+			-no-pie \
+			-nostdlib \
+			-static \
+			start.s $^ && \
 		$(RAW_GENERATOR) \
 			$(OUT_FILE) \
 			out.elf.tmp && \
