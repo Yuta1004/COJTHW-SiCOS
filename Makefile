@@ -6,7 +6,7 @@ LD_FILE := link_settings.ld
 GCC := /opt/riscv/bin/riscv32-unknown-elf-gcc
 RAW_GENERATOR := python3 /workdir/raw_generator.py
 
-compile: *.c
+compile: src/*.c
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(GCC) \
 			-o out.elf.tmp \
