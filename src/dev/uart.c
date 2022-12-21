@@ -1,5 +1,5 @@
+#include "../std/muldiv.h"
 #include "uart.h"
-#include "muldiv.h"
 
 void dev_wait() {
     while(STAT_REG != OK_STAT);

@@ -1,5 +1,5 @@
-#include "uart.h"
-#include "muldiv.h"
+#include "std/muldiv.h"
+#include "dev/uart.h"
 
 int fib(int n) {
     if (n == 0)

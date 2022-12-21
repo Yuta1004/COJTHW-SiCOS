@@ -8,7 +8,7 @@ GCC := $(BIN)/riscv32-unknown-elf-gcc
 OBJDUMP := $(BIN)/riscv32-unknown-elf-objdump
 RAW_GENERATOR := python3 /workdir/raw_generator.py
 
-compile: src/*.c
+compile: src/*.c src/**/*.c
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(GCC) \
 			-o out.elf.tmp \
