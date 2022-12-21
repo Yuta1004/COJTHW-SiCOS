@@ -9,6 +9,8 @@
 #define OK_STAT     4
 
 void uart_init();
+void uart_printd(int d);
+void uart_printdln(int d);
 void uart_printc(char c);
 void uart_prints(char *s);
 void uart_printsln(char *s);
