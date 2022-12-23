@@ -1,4 +1,4 @@
-#include "std/muldiv.h"
+#include "calc/muldiv.h"
 #include "dev/uart.h"
 #include "dev/display.h"
 #include "dev/camera.h"
