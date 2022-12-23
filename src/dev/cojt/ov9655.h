@@ -1,8 +1,8 @@
 #ifndef INIT_OV9655_H
 #define INIT_OV9655_H
 
-#define SCCB_BASEADDR   0x43C10000
-#define SCCB_DATA       (*((volatile unsigned int*)SCCB_BASEADDR))
+#define SCCB_BASEADDR   0x50030000
+#define SCCB_DATA       (*((volatile unsigned int*)(SCCB_BASEADDR + 0x00)))
 #define SCCB_STAT       (*((volatile unsigned int*)(SCCB_BASEADDR + 0x04)))
 #define SCCB_BUSY       0x01
 

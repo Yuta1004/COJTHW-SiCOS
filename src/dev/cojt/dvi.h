@@ -1,7 +1,7 @@
 #ifndef DVI_H
 #define DVI_H
 
-#define IIC_BASEADDR    0x41600000
+#define IIC_BASEADDR    0x50010000
 #define IIC_CTRLREG     (*((volatile unsigned int*)(IIC_BASEADDR + 0x100)))
 #define IIC_STATUSREG   (*((volatile unsigned int*)(IIC_BASEADDR + 0x104)))
 #define IIC_TXREG       (*((volatile unsigned int*)(IIC_BASEADDR + 0x108)))
