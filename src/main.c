@@ -1,11 +1,11 @@
 #include "std/muldiv.h"
 #include "dev/uart.h"
+#include "dev/display.h"
+#include "dev/camera.h"
 #include "dev/cojt/gpio.h"
 #include "dev/cojt/dvi.h"
 #include "dev/cojt/ov9655.h"
 #include "dev/cojt/xclk.h"
-#include "dev/display.h"
-#include "dev/camera.h"
 
 int fib(int n) {
     if (n == 0)
@@ -16,19 +16,17 @@ int fib(int n) {
 }
 
 int main() {
+    /* 周辺機器初期設定 */
     init_tpf410();
     init_xclk(XCLK24MHz);
     init_ov9655(OV9655_SXGA);
-    RESOL_CTRL = 0;
-    RESOL_SET = SXGA;
 
-    DISPCTRL = DISPON;
-    DISPADDR = 0x3fa00000;
-
-    CAMCTRL = CAMON;
-    CAMADDR = 0x3fa00000;
-
+    /* 回路初期化 */
+    set_resolution(SXGA);
     uart_init();
+
+    display_on(0x3fa00000);
+    camera_on(0x3fa00000);
 
     uart_printsln("Hello, I'm COJT-original RISC-V(RV32I) core!");
 

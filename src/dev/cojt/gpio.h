@@ -9,4 +9,6 @@
 #define XGA             0x01
 #define SXGA            0x02
 
+void set_resolution(int resol);
+
 #endif
