@@ -10,6 +10,7 @@
 #include "dev/cojt/xclk.h"
 #include "cmd/test/test.h"
 #include "cmd/echo/echo.h"
+#include "cmd/order/order.h"
 
 typedef struct {
     char *name;
@@ -18,7 +19,8 @@ typedef struct {
 
 cmd_info cmd_info_list[] = {
     {"test", cmd_test},
-    {"echo", cmd_echo}
+    {"echo", cmd_echo},
+    {"order", cmd_order}
 };
 
 int main() {
