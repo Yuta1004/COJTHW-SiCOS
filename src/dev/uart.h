@@ -16,5 +16,6 @@ void uart_printc(char c);
 void uart_prints(char *s);
 void uart_printsln(char *s);
 char uart_inputc();
+char *uart_inputs();
 
 #endif

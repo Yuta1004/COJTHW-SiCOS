@@ -53,5 +53,28 @@ void uart_printsln(char *s) {
 
 char uart_inputc() {
     while ((STAT_REG & 0x01) == 0);
-    return (char)(Rx_FIFO & 0xff);
+
+    char ic = (char)(Rx_FIFO & 0xff);
+    uart_printc(ic);
+
+    return ic;
+}
+
+char *uart_inputs() {
+    static char buf[256];
+
+    for (char *p = buf; ; ++ p) {
+        char ic = uart_inputc();
+        if (ic == '\n') {           // 改行文字
+            *p = '\0';
+            break;
+        } else if (ic == '\b') {    // バックスペース
+            if (p == buf) p -= 1;
+            if (p > buf)  p -= 2;
+        } else {
+            *p = ic;
+        }
+    }
+
+    return buf;
 }
