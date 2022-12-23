@@ -9,6 +9,7 @@
 #include "dev/cojt/ov9655.h"
 #include "dev/cojt/xclk.h"
 #include "cmd/test/test.h"
+#include "cmd/echo/echo.h"
 
 typedef struct {
     char *name;
@@ -16,7 +17,8 @@ typedef struct {
 } cmd_info;
 
 cmd_info cmd_info_list[] = {
-    {"test", cmd_test}
+    {"test", cmd_test},
+    {"echo", cmd_echo}
 };
 
 int main() {
