@@ -32,8 +32,18 @@ int main() {
         // ユーザ入力待機
         char *cmd = uart_inputs();
 
-        uart_prints("Exec => \"");
-        uart_prints(cmd);
-        uart_printsln("\"\n");
+        // 引数分解
+        char *argv[16];
+        char **ap = argv;
+        for (char *p = cmd; *p != '\0'; ) {
+            while (*p == ' ') ++ p;
+
+            *(ap++) = p;
+            while (*p != ' ' && *p != '\0') ++ p;
+
+            if (*p == '\0') break;
+            *(p++) = '\0';
+        }
+        *ap = 0;
     }
 }
