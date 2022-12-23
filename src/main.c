@@ -8,18 +8,7 @@
 #include "dev/cojt/dvi.h"
 #include "dev/cojt/ov9655.h"
 #include "dev/cojt/xclk.h"
-
-int test(int argc, char **argv) {
-    uart_prints("argc : ");
-    uart_printd(argc);
-    uart_prints("\nargv : ");
-    for (char **arg = argv; *arg != 0; ++ arg) {
-        uart_prints(*arg);
-        uart_prints(", ");
-    }
-    uart_printsln("");
-    return argc;
-}
+#include "cmd/test/test.h"
 
 typedef struct {
     char *name;
@@ -27,7 +16,7 @@ typedef struct {
 } cmd_info;
 
 cmd_info cmd_info_list[] = {
-    {"test", test}
+    {"test", cmd_test}
 };
 
 int main() {
