@@ -50,3 +50,8 @@ void uart_printsln(char *s) {
     dev_write(0x0d);
     dev_write(0x0a);
 }
+
+char uart_inputc() {
+    while ((STAT_REG & 0x01) == 0);
+    return (char)(Rx_FIFO & 0xff);
+}
