@@ -1,5 +1,5 @@
-#include "init_dvi.h"
-#include "init_xclk.h"
+#include "dvi.h"
+#include "xclk.h"
 
 #define CDCE925_BYTE_RW 0x80
 

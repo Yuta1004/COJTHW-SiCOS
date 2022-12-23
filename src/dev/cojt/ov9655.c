@@ -1,4 +1,4 @@
-#include "init_ov9655.h"
+#include "ov9655.h"
 
 void sccb_write(unsigned int daddr, unsigned waddr, unsigned wdata) {
     while ((SCCB_STAT & SCCB_BUSY) != 0);

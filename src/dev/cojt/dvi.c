@@ -1,4 +1,4 @@
-#include "init_dvi.h"
+#include "dvi.h"
 
 void init_iic(void) {
     IIC_CTRLREG = 0x02; // reset tx fifo
