@@ -1,5 +1,6 @@
 IMAGE := riscv-toolchain:rv32i
 
+IN_FILES := $(shell find obj -name "*.o")
 OUT_FILE := out.raw
 LD_FILE := link_settings.ld
 
@@ -8,25 +9,26 @@ GCC := $(BIN)/riscv32-unknown-elf-gcc
 OBJDUMP := $(BIN)/riscv32-unknown-elf-objdump
 RAW_GENERATOR := python3 /workdir/raw_generator.py
 
-compile: src/*.c src/**/*.c src/**/**/*.c
+compile:
+	make -C kernel
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(GCC) \
-			-o out.elf.tmp \
+			-o out.elf \
 			-T $(LD_FILE) \
 			-no-pie \
 			-nostdlib \
 			-static \
-			start.s $^ && \
+			start.s $(IN_FILES) && \
 		$(RAW_GENERATOR) \
 			$(OUT_FILE) \
-			out.elf.tmp \
+			out.elf \
 	"
 
 objdump:
 	make compile
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(OBJDUMP) \
-			-d out.elf.tmp \
+			-d out.elf \
 	"
 
 run-shell:
@@ -36,6 +38,6 @@ build-image:
 	docker build -t $(IMAGE) .
 
 clean:
-	rm *.raw *.tmp
+	rm *.raw *.elf
 
 .PHONY: compile, objdump, clean

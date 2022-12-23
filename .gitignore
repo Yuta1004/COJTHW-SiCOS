@@ -1,2 +1,4 @@
-*.tmp
+obj/
+
+*.elf
 *.raw
