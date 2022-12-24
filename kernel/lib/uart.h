@@ -2,10 +2,10 @@
 #define UART_H
 
 #define UART_BASEADDR   0x50050000
-#define Rx_FIFO         (*((volatile unsigned int*)(UART_BASEADDR + 0x0)))
-#define Tx_FIFO         (*((volatile unsigned int*)(UART_BASEADDR + 0x4)))
-#define STAT_REG        (*((volatile unsigned int*)(UART_BASEADDR + 0x8)))
-#define CTRL_REG        (*((volatile unsigned int*)(UART_BASEADDR + 0xC)))
+#define UARTRX          (*((volatile unsigned int*)(UART_BASEADDR + 0x0)))
+#define UARTTX          (*((volatile unsigned int*)(UART_BASEADDR + 0x4)))
+#define UARTSTAT        (*((volatile unsigned int*)(UART_BASEADDR + 0x8)))
+#define UARTCTRL        (*((volatile unsigned int*)(UART_BASEADDR + 0xC)))
 
 #define OK_STAT     4
 

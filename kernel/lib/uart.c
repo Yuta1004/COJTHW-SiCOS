@@ -2,16 +2,16 @@
 #include "muldiv.h"
 
 void dev_wait() {
-    while(STAT_REG != OK_STAT);
+    while(UARTSTAT != OK_STAT);
 }
 
 void dev_write(char c) {
     dev_wait();
-    Tx_FIFO = c;
+    UARTTX = c;
 }
 
 void uart_init() {
-    CTRL_REG = 0b00011;
+    UARTCTRL = 0b00011;
 }
 
 void uart_printd(int d) {
@@ -52,9 +52,9 @@ void uart_printsln(char *s) {
 }
 
 char uart_inputc() {
-    while ((STAT_REG & 0x01) == 0);
+    while ((UARTSTAT & 0x01) == 0);
 
-    char ic = (char)(Rx_FIFO & 0xff);
+    char ic = (char)(UARTRX & 0xff);
     uart_printc(ic);
 
     return ic;
