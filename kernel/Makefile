@@ -6,7 +6,7 @@ OUT_FILE := kernel.o
 BIN := /opt/riscv/bin
 GCC := $(BIN)/riscv32-unknown-elf-gcc
 
-compile: $(IN_FILES)
+kernel: $(IN_FILES)
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(GCC) \
 			-c \
@@ -17,7 +17,8 @@ compile: $(IN_FILES)
 			-falign-functions=1024 \
 			$(IN_FILES) \
 	"
-	mkdir -p ../obj/kernel
+	mkdir -p ../obj/kernel/lib ../obj/kernel
+	cp camera.o display.o draw.o muldiv.o string.o uart.o ../obj/kernel/lib
 	mv *.o ../obj/kernel
 
 .PHONY: compile
