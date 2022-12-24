@@ -6,12 +6,8 @@ MEMORY {
 }
 
 SECTIONS {
-    .text : {
+    .text : ALIGN(4) {
         *(.text .text.*)
-    } > MEM
-
-    .data : ALIGN(8) {
-        *(.data .data.*)
     } > MEM
 
     _end = .;

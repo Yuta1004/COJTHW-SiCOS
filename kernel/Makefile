@@ -14,6 +14,7 @@ compile: $(IN_FILES)
 			-no-pie \
 			-nostdlib \
 			-static \
+			-falign-functions=1024 \
 			$(IN_FILES) \
 	"
 	mkdir -p ../obj/kernel

@@ -18,6 +18,7 @@ compile:
 			-no-pie \
 			-nostdlib \
 			-static \
+			-falign-functions=1024 \
 			start.s obj/**/*.o && \
 		$(RAW_GENERATOR) \
 			$(OUT_FILE) \
