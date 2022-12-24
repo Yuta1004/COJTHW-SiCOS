@@ -1,7 +1,7 @@
 #ifndef DRAW_H
 #define DRAW_H
 
-#include "cojt/regbus.h"
+#include "regbus.h"
 
 #define DRAW_BASEADDR   (REGBUS_BASEADDR + 0x2000)
 #define DRAWCTRL        (*(volatile unsigned int *)(DRAW_BASEADDR + 0x0000))

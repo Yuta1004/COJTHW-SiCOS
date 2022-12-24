@@ -1,5 +1,5 @@
-#include "../../dev/uart.h"
 #include "echo.h"
+#include "../../lib/uart.h"
 
 int cmd_echo(int argc, char **argv) {
     for (int idx = 1; idx < argc; ++ idx) {

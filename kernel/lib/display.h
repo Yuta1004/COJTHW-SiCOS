@@ -1,7 +1,7 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-#include "cojt/regbus.h"
+#include "regbus.h"
 
 #define DISP_BASEADDR   (REGBUS_BASEADDR + 0x0000)
 #define DISPADDR        (*(volatile unsigned int *)(DISP_BASEADDR + 0x0000))

@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "cojt/regbus.h"
+#include "regbus.h"
 
 #define CAM_BASEADDR    (REGBUS_BASEADDR + 0x1000)
 #define CAMADDR         (*(volatile unsigned int *)(CAM_BASEADDR + 0x0000))

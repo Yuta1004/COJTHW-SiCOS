@@ -1,5 +1,5 @@
-#include "../../dev/uart.h"
 #include "order.h"
+#include "../../lib/uart.h"
 
 int cmd_order(int argc, char **argv) {
     if (argc == 1) {

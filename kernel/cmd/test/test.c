@@ -1,5 +1,5 @@
-#include "../../dev/uart.h"
 #include "test.h"
+#include "../../lib/uart.h"
 
 int cmd_test(int argc, char **argv) {
     uart_prints("argc : ");
