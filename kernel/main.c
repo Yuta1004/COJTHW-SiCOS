@@ -12,6 +12,8 @@
 #include "cmd/echo/echo.h"
 #include "cmd/order/order.h"
 
+#include "mem.h"
+
 typedef struct {
     char *name;
     int (*fp)(int, char**);
@@ -24,11 +26,6 @@ cmd_info cmd_info_list[] = {
 };
 
 int main() {
-    // 周辺機器初期設定
-    init_tpf410();
-    init_xclk(XCLK24MHz);
-    init_ov9655(OV9655_SXGA);
-
     // 回路初期化
     set_resolution(SXGA);
     uart_init();
@@ -37,6 +34,15 @@ int main() {
     uart_printsln("+--------------+");
     uart_printsln("| SiCOS v0.0.1 |");
     uart_printsln("+--------------+");
+    uart_printsln("");
+
+    // 周辺機器初期設定
+    uart_prints("< STARTUP > Setting Devices ... ");
+    init_tpf410();
+    init_xclk(XCLK24MHz);
+    init_ov9655(OV9655_SXGA);
+    uart_printsln("OK");
+
     uart_printsln("");
 
     // シェル
