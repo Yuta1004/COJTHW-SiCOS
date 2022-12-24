@@ -6,6 +6,7 @@ from elftools.elf.elffile import ELFFile
 def write_raw(out, body):
     with open(out, "wb") as f:
         f.write(body)
+        f.write(bytearray(0x200))
 
 
 def parse(out, f):
