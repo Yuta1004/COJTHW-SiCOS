@@ -43,6 +43,11 @@ int main() {
     init_ov9655(OV9655_SXGA);
     uart_printsln("OK");
 
+    // メモリアロケータ初期化
+    uart_prints("< STARTUP > Initializing Memory Allocator ... ");
+    mem_alloc_table_init();
+    uart_printsln("OK");
+
     uart_printsln("");
 
     // シェル
