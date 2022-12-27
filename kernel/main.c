@@ -1,3 +1,4 @@
+#include "fs.h"
 #include "mem.h"
 #include "lib/muldiv.h"
 #include "lib/string.h"
@@ -40,6 +41,11 @@ int main() {
     init_tpf410();
     init_xclk(XCLK24MHz);
     init_ov9655(OV9655_SXGA);
+    uart_printsln("OK");
+
+    // ファイルシステム初期化
+    uart_prints("< STARTUP > Initializing File System ... ");
+    fs_init();
     uart_printsln("OK");
 
     // メモリアロケータ初期化
