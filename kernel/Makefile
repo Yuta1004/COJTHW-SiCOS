@@ -15,6 +15,18 @@ kernel.elf: $(shell find . -name "*.c")
 			start.s $^ \
 	"
 
+lib: $(shell find lib -name "*.c")
+	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
+		$(GCC) \
+			-c \
+			-no-pie \
+			-nostdlib \
+			-static \
+			-falign-functions=1024 \
+			$^ \
+	"
+	mv *.o lib
+
 clean:
 	rm -f *.elf
 
