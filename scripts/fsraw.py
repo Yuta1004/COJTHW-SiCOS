@@ -1,5 +1,6 @@
 import os
 import sys
+import glob
 
 packaged_fnames = []
 
@@ -52,11 +53,14 @@ if __name__ == "__main__":
 
     of = open(sys.argv[1], "wb")
 
-    for fpath in sys.argv[2:]:
-        with open(fpath, "rb") as f:
-            permission = 0b101
-            fname = fpath.split("/")[-1]
-            fsize = os.path.getsize(fname)
-            packaging(of, f, permission, fname, fsize)
+    for fpreq in sys.argv[2:]:
+        for fpath in glob.glob(fpreq):
+            print("Packaging", fpath, end="\t... ")
+            with open(fpath, "rb") as f:
+                permission = 0b101
+                fname = fpath.split("/")[-1]
+                fsize = os.path.getsize(fpath)
+                packaging(of, f, permission, fname, fsize)
+            print("OK")
 
     of.close()
