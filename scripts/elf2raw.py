@@ -17,9 +17,14 @@ if __name__ == "__main__":
         elffile.iter_segments()
     ))[0]
 
+    # コードが配置されているアドレスを計算
+    entry_addr = elffile.header.e_entry
+    segment_addr = t_segment.header.p_paddr
+    offset = entry_addr - segment_addr
+
     # RAWファイル書き出し
     with open(sys.argv[1], "wb") as of:
-        of.write(t_segment.data())
+        of.write(t_segment.data()[offset:])
         of.write(bytearray(0x200))
 
     ef.close()
