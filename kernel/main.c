@@ -11,7 +11,6 @@
 #include "dev/ov9655.h"
 #include "dev/xclk.h"
 #include "cmd/echo/echo.h"
-#include "cmd/order/order.h"
 #include "cmd/fcreate/fcreate.h"
 #include "cmd/flist/flist.h"
 #include "cmd/fremove/fremove.h"
@@ -25,7 +24,6 @@ typedef struct {
 
 cmd_info cmd_info_list[] = {
     {"echo", cmd_echo},
-    {"order", cmd_order},
     {"fcreate", cmd_fcreate},
     {"flist", cmd_flist},
     {"fremove", cmd_fremove},

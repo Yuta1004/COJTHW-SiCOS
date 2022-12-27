@@ -1,7 +1,6 @@
-#include "order.h"
-#include "../../lib/uart.h"
+#include <uart.h>
 
-int cmd_order(int argc, char **argv) {
+int main(int argc, char **argv) {
     if (argc == 1) {
         uart_printsln("Is the order a rabbit?");
     } else {
