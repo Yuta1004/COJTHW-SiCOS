@@ -6,6 +6,7 @@
 int cmd_fcreate(int argc, char **argv) {
     if (argc < 4) {
         uart_printsln("USAGE: fcreate <FILE_NAME> <PERMISSION> <SIZE>");
+        return 1;
     }
 
     unsigned char permission = (unsigned char)strtol(argv[2], 0, 0);
@@ -14,4 +15,5 @@ int cmd_fcreate(int argc, char **argv) {
     if (f_create(argv[1], permission, size) != 0) {
         uart_printsln("Error!");
     }
+    return 0;
 }

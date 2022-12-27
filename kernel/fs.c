@@ -33,6 +33,11 @@ FS_Entry *fs_next(FS_Entry *fp) {
 }
 
 int f_create(char *fname, unsigned char permission, unsigned int size) {
+    // 重複確認
+    if (f_get(fname) != 0) {
+        return FERROR;
+    }
+
     // 使用エントリ数算出
     int entries = ((size + 0x18) >> 12) + 1;
 
@@ -62,11 +67,9 @@ int f_create(char *fname, unsigned char permission, unsigned int size) {
         for (int cnt = 1; cnt < entries; ++ cnt) {
             fp[cnt].permission = permission & 0b111;
         }
-
-        return 0;
+        return FSUCCESS;
     }
-
-    return 1;
+    return FERROR;
 }
 
 void f_remove(char *fname) {

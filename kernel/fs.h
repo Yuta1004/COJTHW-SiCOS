@@ -16,6 +16,9 @@ typedef struct {
 #define FCHECK(fp)  ((*((unsigned int*)(fp)) & 0xffffff) == 0x410412)
 #define FUSED(fp)   (FCHECK(fp) && (*((unsigned int*)(fp)) & 0xff000000) != 0)
 
+#define FSUCCESS    0
+#define FERROR      1
+
 void fs_init();
 FS_Entry *fs_head();
 FS_Entry *fs_next(FS_Entry *fp);
