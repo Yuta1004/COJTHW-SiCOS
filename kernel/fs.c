@@ -89,4 +89,5 @@ FS_Entry *f_get(char *fname) {
         if (strcmp(fname, fp->name) != 0) continue;
         return fp;
     }
+    return 0;
 }
