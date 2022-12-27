@@ -1,6 +1,6 @@
 IMAGE := riscv-toolchain:rv32i
 
-APP_NAME := temp
+APP_NAME := test
 
 GCC := /opt/riscv/bin/riscv32-unknown-elf-gcc
 ELF2RAW := /opt/scripts/elf2raw.py

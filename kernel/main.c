@@ -10,7 +10,6 @@
 #include "dev/dvi.h"
 #include "dev/ov9655.h"
 #include "dev/xclk.h"
-#include "cmd/test/test.h"
 #include "cmd/echo/echo.h"
 #include "cmd/order/order.h"
 #include "cmd/fcreate/fcreate.h"
@@ -25,7 +24,6 @@ typedef struct {
 } cmd_info;
 
 cmd_info cmd_info_list[] = {
-    {"test", cmd_test},
     {"echo", cmd_echo},
     {"order", cmd_order},
     {"fcreate", cmd_fcreate},
