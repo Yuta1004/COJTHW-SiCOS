@@ -1,6 +1,5 @@
 IMAGE := riscv-toolchain:rv32i
 
-OBJDUMP := $(BIN)/riscv32-unknown-elf-objdump
 RAW_GENERATOR := python3 /workdir/raw_generator.py
 
 kernel.raw: $(shell find kernel -name "*.c")
@@ -9,13 +8,6 @@ kernel.raw: $(shell find kernel -name "*.c")
 		$(RAW_GENERATOR) \
 			kernel.raw \
 			kernel/kernel.elf \
-	"
-
-objdump:
-	make compile
-	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
-		$(OBJDUMP) \
-			-d kernel.elf \
 	"
 
 run-shell:
