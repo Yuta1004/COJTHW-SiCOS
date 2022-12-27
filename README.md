@@ -8,9 +8,9 @@
 
 ## コマンド
 
-### `make kernel.raw`
+### `make all`
 
-kernel/ をビルドして `kernel.raw` を生成
+`kernel.raw` `fs.raw` を生成
 
 ### `make run-shell`
 
