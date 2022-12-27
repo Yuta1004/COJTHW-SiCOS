@@ -16,3 +16,8 @@ kernel.elf: $(IN_FILES)
 			-falign-functions=1024 \
 			start.s $(IN_FILES) \
 	"
+
+clean:
+	rm -f *.elf
+
+.PHONY: clean

@@ -4,7 +4,7 @@ OBJDUMP := $(BIN)/riscv32-unknown-elf-objdump
 RAW_GENERATOR := python3 /workdir/raw_generator.py
 
 kernel.raw: $(shell find kernel -name "*.c")
-	make -C kernel
+	make -C kernel kernel.elf
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c "\
 		$(RAW_GENERATOR) \
 			kernel.raw \
@@ -26,5 +26,6 @@ build-image:
 
 clean:
 	rm -f *.raw
+	make -C kernel clean
 
 .PHONY: kernel.raw, objdump, clean
