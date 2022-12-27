@@ -1,4 +1,5 @@
 #include "fs.h"
+#include "lib/string.h"
 
 #include "lib/uart.h"
 
@@ -68,6 +69,18 @@ int f_create(char *fname, unsigned int size) {
     return 1;
 }
 
+void f_remove(char *fname) {
+    for (FS_Entry *fp = fs_head(); fp != 0; fp = fs_next(fp)) {
+        if (!FUSED(fp)) continue;
+        if (strcmp(fname, fp->name) != 0) continue;
 
-// int f_remove(char *fname);
+        // 使用していたエントリをすべて未使用にする
+        int entries = ((fp->size + 0x18) >> 12) + 1;
+        for (int idx = 0; idx < entries; ++ idx) {
+            fp[idx].permission = 0;
+        }
+        return;
+    }
+}
+
 // FS_Entry *f_read(char *fname);
