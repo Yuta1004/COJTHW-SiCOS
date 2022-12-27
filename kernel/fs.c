@@ -32,7 +32,7 @@ FS_Entry *fs_next(FS_Entry *fp) {
     return 0;
 }
 
-int f_create(char *fname, unsigned int size) {
+int f_create(char *fname, unsigned char permission, unsigned int size) {
     // 使用エントリ数算出
     int entries = ((size + 0x18) >> 12) + 1;
 
@@ -51,7 +51,7 @@ int f_create(char *fname, unsigned int size) {
         if (cnt != entries) continue;
 
         // エントリ作成
-        fp->permission = 0b100;
+        fp->permission = permission & 0b111;
         fp->size = size;
         for (int cnt = 0; cnt < 11; ++ cnt) {
             fp->name[cnt] = fname[cnt];
@@ -60,7 +60,7 @@ int f_create(char *fname, unsigned int size) {
 
         // 連続して使用するエントリを使用済みにする
         for (int cnt = 1; cnt < entries; ++ cnt) {
-            fp[cnt].permission = 0b100;
+            fp[cnt].permission = permission & 0b111;
         }
 
         return 0;

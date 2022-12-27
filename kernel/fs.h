@@ -20,7 +20,7 @@ void fs_init();
 FS_Entry *fs_head();
 FS_Entry *fs_next(FS_Entry *fp);
 
-int f_create(char *fname, unsigned int size);
+int f_create(char *fname, unsigned char permission, unsigned int size);
 void f_remove(char *fname);
 FS_Entry *f_get(char *fname);
 
