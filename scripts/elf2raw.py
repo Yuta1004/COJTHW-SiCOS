@@ -4,7 +4,7 @@ from elftools.elf.elffile import ELFFile
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python3 raw_generator.py <OUT> <ELF>")
+        print("Usage: python3 elf2raw.py <OUT> <ELF>")
         exit(0)
 
     # コードが配置されているセグメントを取得
