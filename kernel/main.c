@@ -15,6 +15,7 @@
 #include "cmd/order/order.h"
 #include "cmd/fcreate/fcreate.h"
 #include "cmd/flist/flist.h"
+#include "cmd/fremove/fremove.h"
 
 typedef struct {
     char *name;
@@ -26,7 +27,8 @@ cmd_info cmd_info_list[] = {
     {"echo", cmd_echo},
     {"order", cmd_order},
     {"fcreate", cmd_fcreate},
-    {"flist", cmd_flist}
+    {"flist", cmd_flist},
+    {"fremove", cmd_fremove}
 };
 
 int main() {
