@@ -11,9 +11,9 @@ void draw_exec() {
     DRAWCTRL = DRAWRST;
 }
 
-void draw_set_frame(unsigned int addr, unsigned int width, unsigned int height) {
+void draw_set_frame(unsigned int width, unsigned int height) {
     draw_command(0x20000000);
-    draw_command(addr);
+    draw_command(0x24000000);
     draw_command(width<<16 | height);
 }
 

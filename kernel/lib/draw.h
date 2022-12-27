@@ -19,7 +19,7 @@
 void draw_command(int cmd);
 void draw_exec();
 
-void draw_set_frame(unsigned int addr, unsigned int width, unsigned int height);
+void draw_set_frame(unsigned int width, unsigned int height);
 void draw_set_drawarea(unsigned int x0, unsigned int y0, unsigned int width, unsigned int height);
 void draw_set_color(unsigned int a, unsigned int r, unsigned g, unsigned int b);
 

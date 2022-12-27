@@ -15,7 +15,7 @@
 #define DISPINTENBL     0x01
 #define DISPINTCLR      0x02
 
-void display_on(unsigned int addr);
+void display_on();
 void display_off();
 
 #endif
