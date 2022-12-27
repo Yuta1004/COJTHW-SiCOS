@@ -1,6 +1,6 @@
 IMAGE := riscv-toolchain:rv32i
 
-RAW_GENERATOR := python3 /workdir/raw_generator.py
+RAW_GENERATOR := python3 /workdir/scripts/raw_generator.py
 
 kernel.raw: $(shell find kernel -name "*.c")
 	make -C kernel kernel.elf
