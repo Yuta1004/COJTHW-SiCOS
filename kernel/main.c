@@ -57,7 +57,7 @@ loop_top:
         uart_printc('[');
         uart_printd(stat);
         uart_printc(']');
-        uart_prints("> ");
+        uart_prints(" $ ");
 
         // ユーザ入力待機
         char *cmd = uart_inputs();
