@@ -83,4 +83,10 @@ void f_remove(char *fname) {
     }
 }
 
-// FS_Entry *f_read(char *fname);
+FS_Entry *f_get(char *fname) {
+    for (FS_Entry *fp = fs_head(); fp != 0; fp = fs_next(fp)) {
+        if (!FUSED(fp)) continue;
+        if (strcmp(fname, fp->name) != 0) continue;
+        return fp;
+    }
+}

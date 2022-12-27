@@ -22,6 +22,6 @@ FS_Entry *fs_next(FS_Entry *fp);
 
 int f_create(char *fname, unsigned int size);
 void f_remove(char *fname);
-FS_Entry *f_read(char *fname);
+FS_Entry *f_get(char *fname);
 
 #endif
