@@ -1,5 +1,7 @@
-fs/entries/
 *.o
 *.elf
 *.raw
 *.app
+
+fs/entries/*
+!.gitkeep
