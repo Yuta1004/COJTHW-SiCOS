@@ -1,6 +1,6 @@
 IMAGE := riscv-toolchain:rv32i
 
-OUT_FILE := out.raw
+OUT_FILE := kernel.raw
 LD_FILE := link_settings.ld
 
 BIN := /opt/riscv/bin
@@ -13,7 +13,7 @@ compile:
 	make -C kernel
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(GCC) \
-			-o out.elf \
+			-o kernel.elf \
 			-T $(LD_FILE) \
 			-no-pie \
 			-nostdlib \
@@ -22,14 +22,14 @@ compile:
 			start.s obj/**/*.o && \
 		$(RAW_GENERATOR) \
 			$(OUT_FILE) \
-			out.elf \
+			kernel.elf \
 	"
 
 objdump:
 	make compile
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(OBJDUMP) \
-			-d out.elf \
+			-d kernel.elf \
 	"
 
 run-shell:
