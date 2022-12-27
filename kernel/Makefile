@@ -1,9 +1,9 @@
 IMAGE := riscv-toolchain:rv32i
 
-BIN := /opt/riscv/bin
-GCC := $(BIN)/riscv32-unknown-elf-gcc
+GCC := /opt/riscv/bin/riscv32-unknown-elf-gcc
+ELF2RAW := /opt/scripts/elf2raw.py
 
-kernel.elf: $(shell find . -name "*.c")
+kernel.raw: $(shell find . -name "*.c")
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(GCC) \
 			-o kernel.elf \
@@ -12,8 +12,12 @@ kernel.elf: $(shell find . -name "*.c")
 			-nostdlib \
 			-static \
 			-falign-functions=1024 \
-			start.s $^ \
+			start.s $^ && \
+		$(ELF2RAW) \
+			kernel.raw \
+			kernel.elf \
 	"
+
 
 lib: $(shell find lib -name "*.c")
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \

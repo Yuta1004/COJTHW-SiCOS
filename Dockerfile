@@ -17,4 +17,8 @@ RUN git clone https://github.com/riscv/riscv-gnu-toolchain && \
     make
 
 # Setup Python Env
-RUN pip3 install pyelftools
+COPY ./scripts/* /opt/scripts/
+
+RUN pip3 install pyelftools && \
+    sed -i "s/\r//g" /opt/scripts/* && \
+    chmod +x /opt/scripts/*
