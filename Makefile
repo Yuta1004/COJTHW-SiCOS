@@ -1,6 +1,7 @@
 IMAGE := riscv-toolchain:rv32i
 
 ELF2RAW := python3 /workdir/scripts/elf2raw.py
+FSRAW := python3 /workdir/scripts/fsraw.py
 
 kernel.raw: $(shell find kernel -name "*.c")
 	make -C kernel kernel.elf
@@ -8,6 +9,14 @@ kernel.raw: $(shell find kernel -name "*.c")
 		$(ELF2RAW) \
 			kernel.raw \
 			kernel/kernel.elf \
+	"
+
+fs.raw:
+	mkdir -p fs
+	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c "\
+		$(FSRAW) \
+			fs.raw \
+			fs/* fs/**/* \
 	"
 
 run-shell:
@@ -20,4 +29,4 @@ clean:
 	rm -f *.raw
 	make -C kernel clean
 
-.PHONY: kernel.raw, objdump, clean
+.PHONY: kernel.raw, fs.raw, run-shell, build-image, clean
