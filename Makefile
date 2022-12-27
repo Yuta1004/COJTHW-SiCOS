@@ -1,11 +1,11 @@
 IMAGE := riscv-toolchain:rv32i
 
-RAW_GENERATOR := python3 /workdir/scripts/raw_generator.py
+ELF2RAW := python3 /workdir/scripts/elf2raw.py
 
 kernel.raw: $(shell find kernel -name "*.c")
 	make -C kernel kernel.elf
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c "\
-		$(RAW_GENERATOR) \
+		$(ELF2RAW) \
 			kernel.raw \
 			kernel/kernel.elf \
 	"
