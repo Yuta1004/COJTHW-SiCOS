@@ -33,8 +33,8 @@ FS_Entry *fs_next(FS_Entry *fp) {
 }
 
 int f_create(char *fname, unsigned int size) {
-    // 使用ページ数算出
-    int pages = ((size + 0x18) >> 12) + 1;
+    // 使用エントリ数算出
+    int entries = ((size + 0x18) >> 12) + 1;
 
     // 空きエントリ検索 -> エントリ作成
     for (FS_Entry *fp = fs_head(); fp != 0; fp = fs_next(fp)) {
@@ -42,13 +42,13 @@ int f_create(char *fname, unsigned int size) {
 
         int cnt = 1;
         FS_Entry *sfp = fp;
-        for (; cnt < pages; ++ cnt) {
+        for (; cnt < entries; ++ cnt) {
             sfp = fs_next(sfp);
             if (FUSED(sfp) || sfp == 0) {
                 break;
             }
         }
-        if (cnt != pages) continue;
+        if (cnt != entries) continue;
 
         // エントリ作成
         fp->permission = 0b100;
@@ -59,7 +59,7 @@ int f_create(char *fname, unsigned int size) {
         fp->name[11] = '\0';
 
         // 連続して使用するエントリを使用済みにする
-        for (int cnt = 1; cnt < pages; ++ cnt) {
+        for (int cnt = 1; cnt < entries; ++ cnt) {
             fp[cnt].permission = 0b100;
         }
 
