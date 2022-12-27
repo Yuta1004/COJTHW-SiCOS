@@ -8,8 +8,18 @@
 
 ## コマンド
 
-- `make compile`
-- `make objdump`
-- `make run-shell`
-- `make build-image`
-- `make clean`
+### `make kernel.raw`
+
+kernel/ をビルドして `kernel.raw` を生成
+
+### `make run-shell`
+
+ビルド用Dockerイメージのシェルを起動
+
+### `make buikld-image`
+
+ビルド用Dockerイメージの生成
+
+### `make clean`
+
+一時ファイルなど削除
