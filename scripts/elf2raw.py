@@ -13,7 +13,7 @@ if __name__ == "__main__":
     ef = open(sys.argv[2], "rb")
     elffile = ELFFile(ef)
     t_segment = list(filter(
-        lambda s: s.header["p_paddr"] == 0x20000000,
+        lambda s: s.header["p_type"] == "PT_LOAD",
         elffile.iter_segments()
     ))[0]
 
