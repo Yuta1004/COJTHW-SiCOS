@@ -17,6 +17,7 @@
 #include "cmd/flist/flist.h"
 #include "cmd/fremove/fremove.h"
 #include "cmd/fread/fread.h"
+#include "cmd/exec/exec.h"
 
 typedef struct {
     char *name;
@@ -30,7 +31,8 @@ cmd_info cmd_info_list[] = {
     {"fcreate", cmd_fcreate},
     {"flist", cmd_flist},
     {"fremove", cmd_fremove},
-    {"fread", cmd_fread}
+    {"fread", cmd_fread},
+    {"exec", cmd_exec}
 };
 
 int main() {

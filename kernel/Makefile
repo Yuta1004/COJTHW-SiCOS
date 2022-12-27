@@ -23,7 +23,7 @@ lib: $(shell find lib -name "*.c")
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(GCC) \
 			-c \
-			-no-pie \
+			-fPIC \
 			-nostdlib \
 			-static \
 			-falign-functions=1024 \
@@ -32,6 +32,6 @@ lib: $(shell find lib -name "*.c")
 	mv *.o lib
 
 clean:
-	rm -f *.elf
+	rm -f kernel.raw kernel.elf
 
 .PHONY: clean

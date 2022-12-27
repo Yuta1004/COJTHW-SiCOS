@@ -2,3 +2,4 @@ fs/entries/
 *.o
 *.elf
 *.raw
+*.app
