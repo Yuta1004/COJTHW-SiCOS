@@ -19,5 +19,6 @@ clean:
 	rm -f *.raw
 	make -C kernel clean
 	make -C fs clean
+	make -C apps clean
 
 .PHONY: kernel.raw, fs.raw, run-shell, build-image, clean

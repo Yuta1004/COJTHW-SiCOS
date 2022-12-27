@@ -3,10 +3,8 @@ IMAGE := riscv-toolchain:rv32i
 FSRAW := /opt/scripts/fsraw.py
 
 fs.raw: $(shell find entries -name "*") $(shell find ../apps -name "*.c")
-	make -C ../apps/test
-	cp ../apps/test/test.app entries
-	make -C ../apps/order
-	cp ../apps/order/order.app entries
+	make -C ../apps
+	cp ../apps/*.app entries
 	docker run -it -v $(CURDIR):/workdir --rm $(IMAGE) bash -c " \
 		$(FSRAW) \
 			fs.raw \
