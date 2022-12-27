@@ -5,7 +5,7 @@ APP_NAME := test
 GCC := /opt/riscv/bin/riscv32-unknown-elf-gcc
 ELF2RAW := /opt/scripts/elf2raw.py
 
-app: $(shell find . -name "*.c")
+test.app: $(shell find . -name "*.c")
 	make -C ../../kernel lib
 	docker run -it -v $(CURDIR):/workdir/app -v $(CURDIR)/../../kernel/lib:/workdir/lib --rm $(IMAGE) bash -c " \
 		cd /workdir/app && \
