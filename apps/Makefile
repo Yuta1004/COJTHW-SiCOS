@@ -4,6 +4,7 @@ apps:
 	make -C fib 	&& cp fib/fibn.app .
 	make -C ball 	&& cp ball/ball.app .
 	make -C count 	&& cp count/count.app .
+	make -C echo 	&& cp echo/echo.app .
 
 clean:
 	rm -f *.app
@@ -12,5 +13,6 @@ clean:
 	make -C fib clean
 	make -C ball clean
 	make -C count clean
+	make -C echo clean
 
 .PHONY: clean

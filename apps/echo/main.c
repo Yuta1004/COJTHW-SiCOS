@@ -1,7 +1,6 @@
-#include "echo.h"
-#include "../../lib/uart.h"
+#include <uart.h>
 
-int cmd_echo(int argc, char **argv) {
+int main(int argc, char **argv) {
     for (int idx = 1; idx < argc; ++ idx) {
         uart_prints(argv[idx]);
         if (idx < argc-1) {
@@ -9,6 +8,5 @@ int cmd_echo(int argc, char **argv) {
         }
     }
     uart_printsln("");
-
     return 0;
 }
