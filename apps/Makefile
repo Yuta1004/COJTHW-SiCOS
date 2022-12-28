@@ -1,7 +1,7 @@
 apps:
 	make -C test 	&& cp test/test.app .
 	make -C order 	&& cp order/order.app .
-	make -C fib 	&& cp fib/fib.app .
+	make -C fib 	&& cp fib/fibn.app .
 	make -C ball 	&& cp ball/ball.app .
 
 clean:

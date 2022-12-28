@@ -1,11 +1,11 @@
 IMAGE := riscv-toolchain:rv32i
 
-APP_NAME := fib
+APP_NAME := fibn
 
 GCC := /opt/riscv/bin/riscv32-unknown-elf-gcc
 ELF2RAW := /opt/scripts/elf2raw.py
 
-fib.app: $(shell find . -name "*.c")
+fibn.app: $(shell find . -name "*.c")
 	make -C ../../kernel lib
 	docker run -it -v $(CURDIR):/workdir/app -v $(CURDIR)/../../kernel/lib:/workdir/lib --rm $(IMAGE) bash -c " \
 		cd /workdir/app && \
