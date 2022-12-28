@@ -10,6 +10,7 @@
 #include "dev/dvi.h"
 #include "dev/ov9655.h"
 #include "dev/xclk.h"
+#include "cmd/osinfo/osinfo.h"
 #include "cmd/fcreate/fcreate.h"
 #include "cmd/flist/flist.h"
 #include "cmd/fremove/fremove.h"
@@ -22,6 +23,7 @@ typedef struct {
 } cmd_info;
 
 cmd_info cmd_info_list[] = {
+    {"osinfo", cmd_osinfo},
     {"fcreate", cmd_fcreate},
     {"flist", cmd_flist},
     {"fremove", cmd_fremove},
@@ -35,9 +37,7 @@ int main() {
     uart_init();
 
     // 起動メッセージ
-    uart_printsln("+--------------+");
-    uart_printsln("| SiCOS v0.0.1 |");
-    uart_printsln("+--------------+");
+    cmd_osinfo(0, 0);
     uart_printsln("");
 
     // 周辺機器初期設定
