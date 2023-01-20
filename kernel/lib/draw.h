@@ -16,6 +16,12 @@
 #define DRAWINTENBL     0x01
 #define DRAWINTCLR      0x02
 
+#define DRAW_FRAME(code) {\
+    draw_begin();\
+    code;\
+    draw_end();\
+}
+
 void draw_begin();
 void draw_end();
 

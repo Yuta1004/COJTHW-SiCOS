@@ -14,29 +14,25 @@ int main(int argc, char **argv) {
 
     display_on();
 
-    draw_begin();
+    DRAW_FRAME({
+        draw_set_color(0, 0, 255, 0);
+        draw_box(0, 0, 1280, 1024);
 
-    draw_set_color(0, 0, 255, 0);
-    draw_box(0, 0, 1280, 1024);
-
-    draw_set_color(0, 255, 255, 128);
-    draw_box(50, 50, 1180, 924);
-
-    draw_end();
+        draw_set_color(0, 255, 255, 128);
+        draw_box(50, 50, 1180, 924);
+    });
 
     int ox = 50; int oy = 50;
     int px = 50; int py = 50;
     int vx = 5; int vy = 5;
     for (int frame = 0; frame < max_frame; ++ frame) {
-        draw_begin();
+        DRAW_FRAME({
+            draw_set_color(0, 255, 255, 128);
+            draw_box(ox, oy, 100, 100);
 
-        draw_set_color(0, 255, 255, 128);
-        draw_box(ox, oy, 100, 100);
-
-        draw_set_color(0, 255, 0, 0);
-        draw_box(px, py, 100, 100);
-
-        draw_end();
+            draw_set_color(0, 255, 0, 0);
+            draw_box(px, py, 100, 100);
+        });
 
         ox = px; oy = py;
         px += vx; py += vy;
