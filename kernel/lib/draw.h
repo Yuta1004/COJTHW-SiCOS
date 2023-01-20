@@ -16,6 +16,9 @@
 #define DRAWINTENBL     0x01
 #define DRAWINTCLR      0x02
 
+#define ARGB8888        0
+#define RGB888          1
+
 #define DRAW_FRAME(code) {\
     draw_begin();\
     code;\
@@ -26,7 +29,9 @@ void draw_begin();
 void draw_end();
 
 void draw_set_color(unsigned int a, unsigned int r, unsigned g, unsigned int b);
+void draw_set_texture(int fmt, unsigned int addr);
 
 void draw_box(int x0, int y0, unsigned int width, unsigned int height);
+void draw_tbox(int x0, int y0, unsigned int width, unsigned int height, int sx0, int sy0);
 
 #endif

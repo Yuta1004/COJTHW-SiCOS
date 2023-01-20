@@ -24,8 +24,20 @@ void draw_set_color(unsigned int a, unsigned int r, unsigned int g, unsigned int
     DRAWCMD = a<<24 | r<<16 | g<<8 | b;
 }
 
+void draw_set_texture(int fmt, unsigned int addr) {
+    DRAWCMD = 0x22000000 | fmt;
+    DRAWCMD = addr;
+}
+
 void draw_box(int x0, int y0, unsigned int width, unsigned int height) {
     DRAWCMD = 0x81000000;
     DRAWCMD = x0<<16 | y0;
     DRAWCMD = width<<16 | height;
+}
+
+void draw_tbox(int x0, int y0, unsigned int width, unsigned int height, int sx0, int sy0) {
+    DRAWCMD = 0x82000000;
+    DRAWCMD = x0<<16 | y0;
+    DRAWCMD = width<<16 | height;
+    DRAWCMD = sx0<<16 | sy0;
 }
