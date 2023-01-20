@@ -12,8 +12,6 @@ int main(int argc, char **argv) {
         max_frame = (int)strtol(argv[1], 0, 0);
     }
 
-    display_on();
-
     DRAW_FRAME({
         draw_set_color(0, 0, 255, 0);
         draw_box(0, 0, 1280, 1024);

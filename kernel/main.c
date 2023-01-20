@@ -49,6 +49,15 @@ int main() {
     init_ov9655(OV9655_SXGA);
     uart_printsln("OK");
 
+    // VRAM初期化
+    uart_prints("< STARTUP > Initializing VRAM ... ");
+    DRAW_FRAME({
+        draw_set_color(0, 0, 0, 0);
+        draw_box(0, 0, 1280, 1024);
+    });
+    display_on();
+    uart_printsln("OK");
+
     // ファイルシステム初期化
     uart_prints("< STARTUP > Initializing File System ... ");
     fs_init();
