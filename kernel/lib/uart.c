@@ -51,20 +51,22 @@ void uart_printsln(char *s) {
     dev_write(0x0a);
 }
 
-char uart_inputc() {
+char uart_inputc(int settings) {
     while ((UARTSTAT & 0x01) == 0);
 
     char ic = (char)(UARTRX & 0xff);
-    uart_printc(ic);
+    if (settings & UART_ECHO) {
+        uart_printc(ic);
+    }
 
     return ic;
 }
 
-char *uart_inputs() {
+char *uart_inputs(int settings) {
     static char buf[256];
 
     for (char *p = buf; ; ++ p) {
-        char ic = uart_inputc();
+        char ic = uart_inputc(settings);
         if (ic == '\n') {           // 改行文字
             *p = '\0';
             break;

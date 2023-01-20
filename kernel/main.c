@@ -81,7 +81,7 @@ loop_top:
         uart_prints(" $ ");
 
         // ユーザ入力待機
-        char *cmd = uart_inputs();
+        char *cmd = uart_inputs(UART_ECHO);
 
         // 引数分解
         int argc = 0;
