@@ -4,10 +4,7 @@
 
 int cmd_flist(int argc, char **argv) {
     int used_entries = 0;
-    int all_entries = 0;
-
     for (FS_Entry *fp = fs_head(); fp != 0; fp = fs_next(fp)) {
-        ++ all_entries;
         if (!FUSED(fp)) continue;
 
         used_entries += ((fp->size + 0x18) >> 12) + 1;
@@ -23,7 +20,7 @@ int cmd_flist(int argc, char **argv) {
     uart_prints("\nUSED: ");
     uart_printd(used_entries);
     uart_printc('/');
-    uart_printdln(all_entries);
+    uart_printdln(FS_SIZE >> 12);
 
     return 0;
 }
