@@ -16,7 +16,6 @@
 #define DRAWINTENBL     0x01
 #define DRAWINTCLR      0x02
 
-void draw_command(int cmd);
 void draw_exec();
 
 void draw_set_frame(unsigned int width, unsigned int height);
