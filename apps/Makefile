@@ -6,6 +6,7 @@ apps:
 	make -C count 	&& cp count/count.app .
 	make -C echo 	&& cp echo/echo.app .
 	make -C music 	&& cp music/music.app .
+	make -C image 	&& cp image/image.app .
 
 clean:
 	rm -f *.app
@@ -16,5 +17,6 @@ clean:
 	make -C count clean
 	make -C echo clean
 	make -C music clean
+	make -C image clean
 
 .PHONY: clean

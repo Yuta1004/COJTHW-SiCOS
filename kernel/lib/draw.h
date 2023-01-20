@@ -16,10 +16,9 @@
 #define DRAWINTENBL     0x01
 #define DRAWINTCLR      0x02
 
-void draw_exec();
+void draw_begin();
+void draw_end();
 
-void draw_set_frame(unsigned int width, unsigned int height);
-void draw_set_drawarea(unsigned int x0, unsigned int y0, unsigned int width, unsigned int height);
 void draw_set_color(unsigned int a, unsigned int r, unsigned g, unsigned int b);
 
 void draw_box(int x0, int y0, unsigned int width, unsigned int height);
