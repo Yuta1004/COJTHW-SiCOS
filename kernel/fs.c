@@ -4,17 +4,18 @@
 #include "lib/uart.h"
 
 void fs_init() {
-    for (unsigned char *p = FS_SADDR; p < FS_EADDR; p += 4096) {
+    for (unsigned char *p = FS_SADDR; p < FS_EADDR;) {
         FS_Entry *entry = (FS_Entry*)p;
         entry->body = p + 0x18;
         if (FUSED(entry)) {
-            entry += ((entry->size + 0x18) & (~0xfff));
+            p += ((entry->size + 0x18) & (~0xfff));
         } else {
             entry->magic[0] = 0x12;
             entry->magic[1] = 0x04;
             entry->magic[2] = 0x41;
             entry->permission = 0;
             entry->size = 0;
+            p += 4096;
         }
     }
 }
