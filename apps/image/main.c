@@ -5,14 +5,10 @@
 #include <uart.h>
 
 int main(int argc, char **argv) {
-    if (argc < 4) {
-        uart_printsln("USAGE: image <FILE_NAME> <WIDTH> <HEIGHT> <FMT>");
-        uart_printsln("    - FMT : 0 -> ARGB8888, 1 -> RGB888");
+    if (argc < 2) {
+        uart_printsln("USAGE: image <FILE_NAME>");
         return 1;
     }
-    int width = (int)strtol(argv[2], 0, 10);
-    int height = (int)strtol(argv[3], 0, 10);
-    int fmt = (int)strtol(argv[4], 0, 10);
 
     FS_Entry *fp = SYSCALL_F_GET(argv[1]);
     if (fp == 0) {
@@ -20,13 +16,17 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    int x = 0, y = 0;
+    int width = *((int*)(fp->body));
+    int height = *((int*)(fp->body+4));
+    int x = (1280-width) >> 1;
+    int y = height > 1024 ? 0 : (1024-height) >> 1;
+
     while (1) {
         DRAW_FRAME({
             draw_set_color(0, 0, 0, 0);
             draw_box(0, 0, 1280, 1024);
 
-            draw_set_texture(fmt, (unsigned int)fp->body);
+            draw_set_texture(0, (unsigned int)(fp->body+8));
             draw_tbox(x, y, width, height, 0, 0);
         });
 

@@ -41,7 +41,7 @@ def packaging(of, f, permission, fname, fsize):
 
     # ファイル本体
     ext = fname.split(".")[-1]
-    if ext in ["txt", "app"]:
+    if ext in ["txt", "app", "pic"]:
         of.write(f.read())
     else:
         print("\"." + ext + "\" is not supported!")
