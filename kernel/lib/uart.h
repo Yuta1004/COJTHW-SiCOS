@@ -9,7 +9,8 @@
 
 #define OK_STAT     4
 
-#define UART_ECHO   1
+#define UART_ECHO   0b01
+#define UART_HOLD   0b10
 
 void uart_init();
 void uart_printd(int d);

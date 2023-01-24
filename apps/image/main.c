@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
             draw_tbox(x, y, width, height, 0, 0);
         });
 
-        char key = uart_inputc(0);
+        char key = uart_inputc(UART_HOLD);
         if (key == 'k') y -= 5;
         if (key == 'j') y += 5;
         if (key == 'h') x -= 5;

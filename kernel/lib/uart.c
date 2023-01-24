@@ -54,7 +54,11 @@ void uart_printsln(char *s) {
 }
 
 char uart_inputc(int settings) {
-    while ((UARTSTAT & 0x01) == 0);
+    if (settings & UART_HOLD) {
+        while ((UARTSTAT & 0x01) == 0);
+    } else if ((UARTSTAT & 0x01) == 0) {
+        return 0;
+    }
 
     char ic = (char)(UARTRX & 0xff);
     if (settings & UART_ECHO) {
@@ -68,7 +72,7 @@ char *uart_inputs(int settings) {
     static char buf[256];
 
     for (char *p = buf; ; ++ p) {
-        char ic = uart_inputc(settings);
+        char ic = uart_inputc(settings | UART_HOLD);
         if (ic == '\n') {           // 改行文字
             *p = '\0';
             break;
