@@ -24,6 +24,19 @@ void draw_set_color(unsigned int a, unsigned int r, unsigned int g, unsigned int
     DRAWCMD = a<<24 | r<<16 | g<<8 | b;
 }
 
+void draw_set_stmode(unsigned int mode) {
+    DRAWCMD = 0x30000000 | (mode & 0b1);
+}
+
+void draw_set_scolor(unsigned int ignore_mask,
+                     unsigned int la, unsigned int lr, unsigned int lg, unsigned int lb,
+                     unsigned int ha, unsigned int hr, unsigned int hg, unsigned int hb)
+{
+    DRAWCMD = 0x31000000 | (ignore_mask & 0b1111);
+    DRAWCMD = la<<24 | lr<<16 | lg<<8 | lb;
+    DRAWCMD = ha<<24 | hr<<16 | hg<<8 | hb;
+}
+
 void draw_set_texture(int fmt, unsigned int addr) {
     DRAWCMD = 0x22000000 | fmt;
     DRAWCMD = addr;
