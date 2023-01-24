@@ -21,10 +21,12 @@ void uart_printd(int d) {
     buf[31] = '\0';
 
     do {
-        *(p--) = '0' + mod(d, 10);
-        d = div(d, 10);
+        char mod16 = d & 0xf;
+        *(p--) = mod16 < 10 ? ('0' + mod16) : ('A' + (mod16-10));
+        d >>= 4;
     } while (d > 0);
 
+    uart_prints("0x");
     uart_prints(p + 1);
 }
 
