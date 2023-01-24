@@ -40,7 +40,12 @@ def packaging(of, f, permission, fname, fsize):
     of.write(0x00.to_bytes(4, "little"))
 
     # ファイル本体
-    of.write(f.read())
+    ext = fname.split(".")[-1]
+    if ext in ["txt", "app"]:
+        of.write(f.read())
+    else:
+        print("\"." + ext + "\" is not supported!")
+        exit(1)
 
     # アライメント
     wrote_size = 0x18 + fsize
