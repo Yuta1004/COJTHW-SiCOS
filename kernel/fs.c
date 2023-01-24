@@ -27,10 +27,10 @@ FS_Entry *fs_head() {
 FS_Entry *fs_next(FS_Entry *fp) {
     unsigned char *p = (unsigned char*)fp;
     p += ((fp->size + 0x18) & (~0xfff)) + 4096;
-    if (p < FS_EADDR) {
-        return (FS_Entry*)p;
+    while(((FS_Entry*)p)->size == 0 && p < FS_EADDR) {
+        p += 4096;
     }
-    return 0;
+    return p < FS_EADDR ? (FS_Entry*)p : 0;
 }
 
 int f_create(char *fname, unsigned char permission, unsigned int size) {
@@ -43,14 +43,18 @@ int f_create(char *fname, unsigned char permission, unsigned int size) {
     int entries = ((size + 0x18) >> 12) + 1;
 
     // 空きエントリ検索 -> エントリ作成
-    for (FS_Entry *fp = fs_head(); fp != 0; fp = fs_next(fp)) {
-        if (FUSED(fp)) continue;
+    for (unsigned char *p = (unsigned char*)fs_head(); p < FS_EADDR; p += 4096) {
+        FS_Entry *fp = (FS_Entry*)p;
+        if (FUSED(fp)) {
+            p += ((fp->size + 0x18) & (~0xfff));
+            continue;
+        }
 
         int cnt = 1;
-        FS_Entry *sfp = fp;
+        unsigned char *sfp = (unsigned char*)fp;
         for (; cnt < entries; ++ cnt) {
-            sfp = fs_next(sfp);
-            if (FUSED(sfp) || sfp == 0) {
+            sfp += 4096;
+            if (FUSED((FS_Entry*)sfp) || sfp >= FS_EADDR) {
                 break;
             }
         }
@@ -75,7 +79,6 @@ int f_create(char *fname, unsigned char permission, unsigned int size) {
 
 void f_remove(char *fname) {
     for (FS_Entry *fp = fs_head(); fp != 0; fp = fs_next(fp)) {
-        if (!FUSED(fp)) continue;
         if (strcmp(fname, fp->name) != 0) continue;
 
         // 使用していたエントリをすべて未使用にする
@@ -89,7 +92,6 @@ void f_remove(char *fname) {
 
 FS_Entry *f_get(char *fname) {
     for (FS_Entry *fp = fs_head(); fp != 0; fp = fs_next(fp)) {
-        if (!FUSED(fp)) continue;
         if (strcmp(fname, fp->name) != 0) continue;
         return fp;
     }

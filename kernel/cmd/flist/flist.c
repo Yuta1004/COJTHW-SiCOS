@@ -5,8 +5,6 @@
 int cmd_flist(int argc, char **argv) {
     int used_entries = 0;
     for (FS_Entry *fp = fs_head(); fp != 0; fp = fs_next(fp)) {
-        if (!FUSED(fp)) continue;
-
         used_entries += ((fp->size + 0x18) >> 12) + 1;
         uart_prints(fp->name);
         uart_printc('\t');
