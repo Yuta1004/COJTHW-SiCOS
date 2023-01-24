@@ -2,6 +2,7 @@
 #define DRAW_H
 
 #include "regbus.h"
+#include "display.h"
 
 #define DRAW_BASEADDR   (REGBUS_BASEADDR + 0x2000)
 #define DRAWCTRL        (*(volatile unsigned int *)(DRAW_BASEADDR + 0x0000))
@@ -19,13 +20,18 @@
 #define ARGB8888        0
 #define RGB888          1
 
+static unsigned int buff_addr = 0x24000000;
+
 #define DRAW_FRAME(code) {\
-    draw_begin();\
+    buff_addr = (buff_addr == 0x24000000) ? 0x24800000 : 0x24000000; \
+    draw_begin(buff_addr);\
     code;\
     draw_end();\
+    wait_vblank();\
+    display_addr(buff_addr);\
 }
 
-void draw_begin();
+void draw_begin(unsigned int addr);
 void draw_end();
 
 void draw_set_color(unsigned int a, unsigned int r, unsigned g, unsigned int b);

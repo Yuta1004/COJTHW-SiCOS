@@ -1,9 +1,9 @@
 #include "draw.h"
 
-void draw_begin() {
+void draw_begin(unsigned int addr) {
     // Frame
     DRAWCMD = 0x20000000;
-    DRAWCMD = 0x24000000;
+    DRAWCMD = addr;
     DRAWCMD = 1280<<16 | 1024;
 
     // Draw Area

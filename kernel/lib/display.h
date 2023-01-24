@@ -17,5 +17,8 @@
 
 void display_on();
 void display_off();
+void display_addr(unsigned int addr);
+
+void wait_vblank();
 
 #endif

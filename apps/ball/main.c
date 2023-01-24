@@ -20,19 +20,32 @@ int main(int argc, char **argv) {
         draw_box(50, 50, 1180, 924);
     });
 
-    int ox = 50; int oy = 50;
-    int px = 50; int py = 50;
-    int vx = 5; int vy = 5;
+    DRAW_FRAME({
+        draw_set_color(0, 0, 255, 0);
+        draw_box(0, 0, 1280, 1024);
+
+        draw_set_color(0, 255, 255, 128);
+        draw_box(50, 50, 1180, 924);
+    });
+
+    int ox1 = 50, oy1 = 50;
+    int ox2 = 50, oy2 = 50;
+    int px  = 50, py  = 50;
+    int vx  = 5,  vy  = 5;
     for (int frame = 0; frame < max_frame; ++ frame) {
         DRAW_FRAME({
             draw_set_color(0, 255, 255, 128);
-            draw_box(ox, oy, 100, 100);
+            draw_box(ox1, oy1, 100, 100);
+
+            draw_set_color(0, 255, 255, 128);
+            draw_box(ox2, oy2, 100, 100);
 
             draw_set_color(0, 255, 0, 0);
             draw_box(px, py, 100, 100);
         });
 
-        ox = px; oy = py;
+        ox2 = ox1; oy2 = oy1;
+        ox1 = px; oy1 = py;
         px += vx; py += vy;
         if (px < 50 || px > 1280-100-50) {
             vx *= -1;
@@ -42,8 +55,6 @@ int main(int argc, char **argv) {
             vy *= -1;
             py = max(50, min(py, 1024-100-50));
         }
-
-        for (volatile int cnt = 0; cnt < 5000; ++ cnt);
     }
     return 0;
 }

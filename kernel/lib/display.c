@@ -2,9 +2,17 @@
 
 void display_on() {
     DISPCTRL = DISPON;
-    DISPADDR = 0x24000000;
 }
 
 void display_off() {
     DISPCTRL = DISPOFF;
+}
+
+void display_addr(unsigned int addr) {
+    DISPADDR = addr;
+}
+
+void wait_vblank() {
+    DISPCTRL |= 0b10;
+    while((DISPCTRL & 0b10) == 0);
 }
