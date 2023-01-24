@@ -23,6 +23,8 @@ int main(int argc, char **argv) {
 
     while (1) {
         DRAW_FRAME({
+            draw_set_stmode(0);
+
             draw_set_color(0, 0, 0, 0);
             draw_box(0, 0, 1280, 1024);
 

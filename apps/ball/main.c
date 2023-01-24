@@ -10,6 +10,8 @@ int main(int argc, char **argv) {
     uart_printsln("press any key...");
 
     DRAW_FRAME({
+        draw_set_stmode(0);
+
         draw_set_color(0, 0, 255, 0);
         draw_box(0, 0, 1280, 1024);
 
@@ -18,6 +20,8 @@ int main(int argc, char **argv) {
     });
 
     DRAW_FRAME({
+        draw_set_stmode(0);
+
         draw_set_color(0, 0, 255, 0);
         draw_box(0, 0, 1280, 1024);
 
@@ -31,8 +35,7 @@ int main(int argc, char **argv) {
     int vx  = 5,  vy  = 5;
     while(1) {
         DRAW_FRAME({
-            draw_set_color(0, 255, 255, 128);
-            draw_box(ox1, oy1, 100, 100);
+            draw_set_stmode(0);
 
             draw_set_color(0, 255, 255, 128);
             draw_box(ox2, oy2, 100, 100);
