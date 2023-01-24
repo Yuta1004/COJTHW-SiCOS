@@ -7,10 +7,7 @@
 #define max(a, b) (a > b ? a : b)
 
 int main(int argc, char **argv) {
-    int max_frame = 1000;
-    if (argc > 1) {
-        max_frame = (int)strtol(argv[1], 0, 0);
-    }
+    uart_printsln("press any key...");
 
     DRAW_FRAME({
         draw_set_color(0, 0, 255, 0);
@@ -32,7 +29,7 @@ int main(int argc, char **argv) {
     int ox2 = 50, oy2 = 50;
     int px  = 50, py  = 50;
     int vx  = 5,  vy  = 5;
-    for (int frame = 0; frame < max_frame; ++ frame) {
+    while(1) {
         DRAW_FRAME({
             draw_set_color(0, 255, 255, 128);
             draw_box(ox1, oy1, 100, 100);
@@ -55,6 +52,11 @@ int main(int argc, char **argv) {
             vy *= -1;
             py = max(50, min(py, 1024-100-50));
         }
+
+        if (uart_inputc(0) != 0) {
+            break;
+        }
     }
+
     return 0;
 }
