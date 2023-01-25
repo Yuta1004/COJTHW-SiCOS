@@ -14,7 +14,7 @@ void uart_init() {
     UARTCTRL = 0b00011;
 }
 
-void uart_printd(int d) {
+void uart_printh(int d) {
     char buf[32];
 
     char *p = buf + 30;
@@ -30,8 +30,8 @@ void uart_printd(int d) {
     uart_prints(p + 1);
 }
 
-void uart_printdln(int d) {
-    uart_printd(d);
+void uart_printhln(int d) {
+    uart_printh(d);
     uart_printsln("");
 }
 

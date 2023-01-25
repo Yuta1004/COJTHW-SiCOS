@@ -21,9 +21,9 @@ int main(int argc, char **argv) {
     }
 
     uart_prints("Characters : ");
-    uart_printdln(c_num);
+    uart_printhln(c_num);
     uart_prints("Lines : ");
-    uart_printdln(l_num);
+    uart_printhln(l_num);
 
     return 0;
 }

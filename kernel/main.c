@@ -77,7 +77,7 @@ int main() {
 loop_top:
         // プロンプト
         uart_printc('[');
-        uart_printd(stat);
+        uart_printh(stat);
         uart_printc(']');
         uart_prints(" $ ");
 

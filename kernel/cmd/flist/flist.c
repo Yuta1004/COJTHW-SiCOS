@@ -12,13 +12,13 @@ int cmd_flist(int argc, char **argv) {
         uart_printc((fp->permission & 0b010) ? 'w' : ' ');
         uart_printc((fp->permission & 0b001) ? 'x' : ' ');
         uart_printc('\t');
-        uart_printdln(fp->size);
+        uart_printhln(fp->size);
     }
 
     uart_prints("\nUSED: ");
-    uart_printd(used_entries);
+    uart_printh(used_entries);
     uart_printc('/');
-    uart_printdln(FS_SIZE >> 12);
+    uart_printhln(FS_SIZE >> 12);
 
     return 0;
 }

@@ -17,9 +17,9 @@ int main(int argc, char **argv) {
     int result = fib(n);
 
     uart_prints("fib(");
-    uart_printd(n);
+    uart_printh(n);
     uart_prints(") = ");
-    uart_printdln(result);
+    uart_printhln(result);
 
     return 0;
 }

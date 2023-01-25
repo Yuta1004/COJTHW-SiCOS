@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv) {
     uart_prints("argc : ");
-    uart_printd(argc);
+    uart_printh(argc);
 
     uart_prints("\nargv : ");
     for (char **arg = argv; *arg != 0; ++ arg) {
