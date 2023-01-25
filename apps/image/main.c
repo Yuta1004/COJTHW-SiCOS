@@ -4,6 +4,9 @@
 #include <draw.h>
 #include <uart.h>
 
+#define max(a, b) ((a) > (b) ? (a) : (b))
+#define min(a, b) ((a) < (b) ? (a) : (b))
+
 int main(int argc, char **argv) {
     if (argc < 2) {
         uart_printsln("USAGE: image <FILE_NAME>");
@@ -33,10 +36,10 @@ int main(int argc, char **argv) {
         });
 
         char key = uart_inputc(UART_HOLD);
-        if (key == 'k') y -= 5;
-        if (key == 'j') y += 5;
-        if (key == 'h') x -= 5;
-        if (key == 'l') x += 5;
+        if (key == 'k') y = max(0, min(y-5, 1024-height));
+        if (key == 'j') y = max(0, min(y+5, 1024-height));
+        if (key == 'h') x = max(0, min(x-5, 1280-width));
+        if (key == 'l') x = max(0, min(x+5, 1280-width));
         if (key == 'q') break;
     }
 
