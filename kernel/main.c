@@ -5,6 +5,7 @@
 #include "lib/uart.h"
 #include "lib/display.h"
 #include "lib/camera.h"
+#include "lib/mouse.h"
 #include "lib/draw.h"
 #include "dev/gpio.h"
 #include "dev/dvi.h"
