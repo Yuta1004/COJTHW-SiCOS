@@ -24,11 +24,11 @@ void draw_background() {
     });
 }
 
-void draw_mouse(int x[3], int y[3], int z[3], int btn) {
+void draw_mouse(int x[3], int y[3], int z[3], int btn[3]) {
     int color[3] = {
-        MOUSE_CLICKED(btn, MOUSE_LBTN) ? 255 : 0,
-        MOUSE_CLICKED(btn, MOUSE_CBTN) ? 255 : 0,
-        MOUSE_CLICKED(btn, MOUSE_RBTN) ? 255 : 0
+        MOUSE_CLICKED(btn[0], MOUSE_LBTN) ? 255 : 0,
+        MOUSE_CLICKED(btn[0], MOUSE_CBTN) ? 255 : 0,
+        MOUSE_CLICKED(btn[0], MOUSE_RBTN) ? 255 : 0
     };
 
     draw_set_stmode(0);
@@ -47,7 +47,7 @@ void draw_window(Window *w_list) {
     }
 }
 
-void draw(Window *w_list, int m_xpos[3], int m_ypos[3], int m_zpos[3], int m_btn) {
+void draw(Window *w_list, int m_xpos[3], int m_ypos[3], int m_zpos[3], int m_btn[3]) {
     DRAW_FRAME({
         draw_window(w_list);
         draw_mouse(m_xpos, m_ypos, m_zpos, m_btn);
@@ -59,10 +59,11 @@ int main(int argc, char **argv) {
     Window *w_list = window_root();
 
     // マウス関連変数
-    int tmp_m_xpos, tmp_m_ypos, tmp_m_zpos, m_btn;
+    int tmp_m_xpos, tmp_m_ypos, tmp_m_zpos, tmp_m_btn;
     int m_xpos[3] = {0, 0, 0};
     int m_ypos[3] = {0, 0, 0};
     int m_zpos[3] = {0, 0, 0};
+    int m_btn[3]  = {0, 0, 0};
 
     // 初期化処理
     mouse_init(MOUSE_SXGA, MOUSE_SPEED_1);
@@ -70,10 +71,11 @@ int main(int argc, char **argv) {
 
     while (1) {
         // マウスイベント
-        if (mouse_read(&tmp_m_xpos, &tmp_m_ypos, &tmp_m_zpos, &m_btn)) {
+        if (mouse_read(&tmp_m_xpos, &tmp_m_ypos, &tmp_m_zpos, &tmp_m_btn)) {
             queue3_push(m_xpos, tmp_m_xpos);
             queue3_push(m_ypos, tmp_m_ypos);
             queue3_push(m_zpos, tmp_m_zpos);
+            queue3_push(m_btn, tmp_m_btn);
             draw(w_list, m_xpos, m_ypos, m_zpos, m_btn);
         }
 
