@@ -6,6 +6,7 @@
 #include "apps/box.h"
 #include "apps/cbox.h"
 #include "apps/capture.h"
+#include "apps/ball.h"
 
 #define queue3_push(queue, x) {\
     (queue)[2] = (queue)[1];\
@@ -128,6 +129,10 @@ int main(int argc, char **argv) {
 
             case 'd':
                 capapp_new(w_list);
+                break;
+
+            case 'e':
+                ballapp_new(w_list);
                 break;
 
             default:
