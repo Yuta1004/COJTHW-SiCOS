@@ -44,6 +44,10 @@ void draw_window(Window *w_list, int m_xpos[3], int m_ypos[3], int m_zpos[3], in
             }
         }
     }
+    else if (MOUSE_CLICKED(m_btn[0], MOUSE_RBTN)) {
+        Window *wp = get_clicked_window(w_list, m_xpos[0], m_ypos[0]);
+        window_remove(w_list, wp);
+    }
 
     // 描画処理
     for (Window *wp = w_list->next_p; wp != 0; wp = wp->next_p) {

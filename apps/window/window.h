@@ -33,5 +33,6 @@ void window_new(
     void *statp
 );
 void window_liftup(Window *w_list, Window *target);
+void window_remove(Window *w_list, Window *target);
 
 #endif

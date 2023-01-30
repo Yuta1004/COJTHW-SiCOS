@@ -65,3 +65,11 @@ void window_liftup(Window *w_list, Window *target) {
         target->next_p = 0;
     }
 }
+
+void window_remove(Window *w_list, Window *target) {
+    Window *top_window = get_top_window(w_list);
+    target->bef_p->next_p = target->next_p;
+    if (target->next_p != 0) {
+        target->next_p->bef_p = target->bef_p;
+    }
+}
