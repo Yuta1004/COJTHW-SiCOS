@@ -15,6 +15,7 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    sound_ctrl(SSTOP);
     sound_init((unsigned int)(fp->body+0x2c), fp->size);
     sound_ctrl(SPLAY | SLOOP);
     sound_vol(200);
@@ -60,6 +61,9 @@ int main(int argc, char **argv) {
             } else {
                 sound_vol((int)strtol(sargv[1], 0, 10));
             }
+        }
+        else if (strcmp(sargv[0], "continue") == 0) {
+            break;
         }
         else if (strcmp(sargv[0], "exit") == 0) {
             sound_ctrl(SSTOP);
