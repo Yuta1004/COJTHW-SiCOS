@@ -4,6 +4,7 @@
 
 #include "window.h"
 #include "apps/box.h"
+#include "apps/cbox.h"
 
 #define queue3_push(queue, x) {\
     (queue)[2] = (queue)[1];\
@@ -111,6 +112,10 @@ int main(int argc, char **argv) {
 
             case 'b':
                 boxapp_new(w_list);
+                break;
+
+            case 'c':
+                cboxapp_new(w_list);
                 break;
 
             default:
