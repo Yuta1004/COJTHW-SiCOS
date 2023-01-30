@@ -47,7 +47,7 @@ int main() {
     uart_prints("< STARTUP > Setting Devices ... ");
     init_tpf410();
     init_xclk(XCLK24MHz);
-    init_ov9655(OV9655_SXGA);
+    init_ov9655(OV9655_VGA);
     uart_printsln("OK");
 
     // キャプチャ回路設定
