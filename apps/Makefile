@@ -9,6 +9,7 @@ apps:
 	make -C music 	&& cp music/music.app .
 	make -C image 	&& cp image/image.app .
 	make -C mouse	&& cp mouse/mouse.app .
+	make -C window 	&& cp window/window.app .
 
 clean:
 	rm -f *.app
@@ -22,5 +23,6 @@ clean:
 	make -C music clean
 	make -C image clean
 	make -C mouse clean
+	make -C window clean
 
 .PHONY: clean
