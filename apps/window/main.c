@@ -1,6 +1,7 @@
 #include <uart.h>
 #include <mouse.h>
 #include <draw.h>
+#include <string.h>
 
 #include "window.h"
 #include "apps/box.h"
@@ -103,6 +104,8 @@ int main(int argc, char **argv) {
     DRAW_FRAME(draw_background());
     DRAW_FRAME(draw_background());
 
+    uart_printsln("press any key...");
+
     while (1) {
         // マウスイベント
         if (mouse_read(&tmp_m_xpos, &tmp_m_ypos, &tmp_m_zpos, &tmp_m_btn)) {
@@ -117,30 +120,51 @@ int main(int argc, char **argv) {
             draw(w_list, m_xpos, m_ypos, m_zpos, m_btn);
         }
 
-        // キー入力
-        char key = uart_inputc(0);
-        switch (key) {
-            case 0:
-                break;
+        // コマンド入力
+        if (uart_inputc(0) != 0) {
+            // プロンプト
+            uart_prints(">> ");
 
-            case 'b':
+            // ユーザ入力待機
+            char *cmd = uart_inputs(UART_ECHO);
+
+            // 引数分解
+            int sargc = 0;
+            char *sargv[16];
+            char **ap = sargv;
+            for (char *p = cmd; *p != '\0'; ) {
+                while (*p == ' ') ++ p;
+
+                sargc ++;
+                *(ap++) = p;
+                while (*p != ' ' && *p != '\0') ++ p;
+
+                if (*p == '\0') break;
+                *(p++) = '\0';
+            }
+            *ap = 0;
+
+            // コマンド実行
+            if (strcmp(sargv[0], "box") == 0) {
                 boxapp_new(w_list);
-                break;
-
-            case 'c':
+            }
+            else if (strcmp(sargv[0], "cbox") == 0) {
                 cboxapp_new(w_list);
-                break;
-
-            case 'd':
-                capapp_new(w_list);
-                break;
-
-            case 'e':
+            }
+            else if (strcmp(sargv[0], "ball") == 0) {
                 ballapp_new(w_list);
-                break;
-
-            default:
+            }
+            else if (strcmp(sargv[0], "cap") == 0) {
+                capapp_new(w_list);
+            }
+            else if (strcmp(sargv[0], "exit") == 0) {
                 goto __exit;
+            }
+            else {
+                uart_printc('\"');
+                uart_prints(sargv[0]);
+                uart_printsln("\" not found...");
+            }
         }
     }
 
