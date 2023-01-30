@@ -17,6 +17,7 @@ int main(int argc, char **argv) {
 
     sound_init((unsigned int)(fp->body+0x2c), fp->size);
     sound_ctrl(SPLAY | SLOOP);
+    sound_vol(200);
 
     while (1) {
         // プロンプト
