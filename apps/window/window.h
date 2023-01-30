@@ -7,6 +7,9 @@ struct Window {
     int width, height;      // 幅, 高さ
     int layer;              // レイヤ番号(値が大きいほど上位)
 
+    /* コールバック */
+    void (*draw_callback)(int, int);
+
     /* リスト構成情報 */
     struct Window *bef_p;
     struct Window *next_p;
@@ -17,6 +20,13 @@ Window *get_top_window(Window *w_list);
 Window *get_clicked_window(Window *w_list, int x, int y);
 
 Window *window_root();
-void window_new(Window *w_list, int x0, int y0, int width, int height);
+void window_new(
+    Window *w_list,
+    int x0,
+    int y0,
+    int width,
+    int height,
+    void (*draw_callback)(int, int)
+);
 
 #endif

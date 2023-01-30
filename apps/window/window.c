@@ -32,13 +32,21 @@ Window *window_root() {
     return wp;
 }
 
-void window_new(Window *w_list, int x0, int y0, int width, int height) {
+void window_new(
+    Window *w_list,
+    int x0,
+    int y0,
+    int width,
+    int height,
+    void (*draw_callback)(int, int)
+) {
     Window *top_window = get_top_window(w_list);
     Window *wp = SYSCALL_M_ALLOC(sizeof(Window));
     wp->x0 = x0;
     wp->y0 = y0;
     wp->width = width;
     wp->height = height;
+    wp->draw_callback = draw_callback;
     wp->layer = top_window->layer+1;
     wp->bef_p = top_window;
     wp->next_p = 0;
