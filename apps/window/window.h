@@ -28,5 +28,6 @@ void window_new(
     int height,
     void (*draw_callback)(int, int)
 );
+void window_liftup(Window *w_list, Window *target);
 
 #endif

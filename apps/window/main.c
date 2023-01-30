@@ -33,11 +33,14 @@ void draw_window(Window *w_list, int m_xpos[3], int m_ypos[3], int m_zpos[3], in
     // クリック判定
     if (MOUSE_CLICKED(m_btn[0], MOUSE_LBTN)) {
         Window *wp = get_clicked_window(w_list, m_xpos[0], m_ypos[0]);
-        if (wp != 0 && MOUSE_CLICKED(m_btn[1], MOUSE_LBTN)) {
-            int dx = m_xpos[0] - m_xpos[1];
-            int dy = m_ypos[0] - m_ypos[1];
-            wp->x0 += dx;
-            wp->y0 += dy;
+        if (wp != 0) {
+            window_liftup(w_list, wp);
+            if (wp != 0 && MOUSE_CLICKED(m_btn[1], MOUSE_LBTN)) {
+                int dx = m_xpos[0] - m_xpos[1];
+                int dy = m_ypos[0] - m_ypos[1];
+                wp->x0 += dx;
+                wp->y0 += dy;
+            }
         }
     }
 

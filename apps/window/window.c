@@ -52,3 +52,14 @@ void window_new(
     wp->next_p = 0;
     top_window->next_p = wp;
 }
+
+void window_liftup(Window *w_list, Window *target) {
+    if (target->next_p != 0) {
+        Window *top_window = get_top_window(w_list);
+        target->bef_p->next_p = target->next_p;
+        target->next_p->bef_p = target->bef_p;
+        top_window->next_p = target;
+        target->bef_p = top_window;
+        target->next_p = 0;
+    }
+}
