@@ -8,6 +8,7 @@
 #include "apps/cbox.h"
 #include "apps/capture.h"
 #include "apps/ball.h"
+#include "apps/image.h"
 
 #define queue3_push(queue, x) {\
     (queue)[2] = (queue)[1];\
@@ -156,6 +157,13 @@ int main(int argc, char **argv) {
             }
             else if (strcmp(sargv[0], "cap") == 0) {
                 capapp_new(w_list);
+            }
+            else if (strcmp(sargv[0], "image") == 0) {
+                if (sargc < 2) {
+                    uart_printsln("USAGE: image <FILE_NAME>");
+                } else {
+                    imgapp_new(w_list, sargv[1]);
+                }
             }
             else if (strcmp(sargv[0], "exit") == 0) {
                 goto __exit;
