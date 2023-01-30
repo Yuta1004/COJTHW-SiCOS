@@ -37,6 +37,16 @@ void draw_set_scolor(unsigned int ignore_mask,
     DRAWCMD = ha<<24 | hr<<16 | hg<<8 | hb;
 }
 
+void draw_set_brendmode(unsigned int mode) {
+    if (mode) {
+        DRAWCMD = 0x33000000 | 0<<20 | 1<<17 | 5<<14 | 1<<11 | 6<<8 | 0;
+        DRAWCMD = 0x80808080;
+        DRAWCMD = 0xffffffff;
+    } else {
+        DRAWCMD = 0x32000000;
+    }
+}
+
 void draw_set_texture(int fmt, unsigned int addr) {
     DRAWCMD = 0x22000000 | fmt;
     DRAWCMD = addr;
