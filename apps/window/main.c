@@ -2,6 +2,12 @@
 #include <mouse.h>
 #include <draw.h>
 
+#define queue3_push(queue, x) {\
+    (queue)[2] = (queue)[1];\
+    (queue)[1] = (queue)[0];\
+    (queue)[0] = (x);\
+}
+
 void draw_background() {
     DRAW_FRAME({
         draw_set_stmode(0);
@@ -16,7 +22,7 @@ void draw_background() {
     });
 }
 
-void draw_pointer(int ox, int oy, int x, int y, int btn) {
+void draw_mouse(int x[3], int y[3], int z[3], int btn) {
     int color[3] = {
         MOUSE_CLICKED(btn, MOUSE_LBTN) ? 255 : 0,
         MOUSE_CLICKED(btn, MOUSE_CBTN) ? 255 : 0,
@@ -27,33 +33,35 @@ void draw_pointer(int ox, int oy, int x, int y, int btn) {
         draw_set_stmode(0);
 
         draw_set_color(0, 128, 128, 128);
-        draw_box(ox, oy, 10, 10);
+        draw_box(x[2], y[2], 10, 10);
 
         draw_set_color(0, color[0], color[1], color[2]);
-        draw_box(x, y, 10, 10);
+        draw_box(x[0], y[0], 10, 10);
     });
 }
 
 int main(int argc, char **argv) {
     // マウス関連変数
-    int m_xpos, m_ypos, m_zpos, m_btn;
-    int x = 0, y = 0;
-    int ox1 = 0, oy1 = 0;
-    int ox2 = 0, oy2 = 0;
+    int tmp_m_xpos, tmp_m_ypos, tmp_m_zpos, m_btn;
+    int m_xpos[3] = {0, 0, 0};
+    int m_ypos[3] = {0, 0, 0};
+    int m_zpos[3] = {0, 0, 0};
 
     // 初期化処理
-    mouse_init(MOUSE_SXGA, MOUSE_SPEED_0);
+    mouse_init(MOUSE_SXGA, MOUSE_SPEED_1);
     draw_background();
 
-    // 描画処理
     while (1) {
-        if (mouse_read(&m_xpos, &m_ypos, &m_zpos, &m_btn)) {
-            ox2 = ox1; oy2 = oy1;
-            ox1 = x; oy1 = y;
-            x = m_xpos; y = m_ypos;
-            draw_pointer(ox2, oy2, x, y, m_btn);
+        // マウス描画
+        if (mouse_read(&tmp_m_xpos, &tmp_m_ypos, &tmp_m_zpos, &m_btn)) {
+            queue3_push(m_xpos, tmp_m_xpos);
+            queue3_push(m_ypos, tmp_m_ypos);
+            queue3_push(m_zpos, tmp_m_zpos);
+            draw_mouse(m_xpos, m_ypos, m_zpos, m_btn);
         }
-        else if (uart_inputc(0) != 0) {
+
+        // キー入力
+        if (uart_inputc(0) != 0) {
             break;
         }
     }
