@@ -3,7 +3,7 @@
 #include "../window.h"
 #include "box.h"
 
-void boxapp_draw(int x0, int y0) {
+void boxapp_draw(Window *wp, int x0, int y0) {
     draw_set_color(0, 255, 0, 0);
     draw_box(x0+20, y0+20, 150, 150);
 
@@ -15,5 +15,5 @@ void boxapp_draw(int x0, int y0) {
 }
 
 void boxapp_new(Window *w_list) {
-    window_new(w_list, 0, 0, 300, 300, boxapp_draw);
+    window_new(w_list, 0, 0, 300, 300, boxapp_draw, 0);
 }

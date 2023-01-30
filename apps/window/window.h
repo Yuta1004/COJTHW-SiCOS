@@ -8,7 +8,10 @@ struct Window {
     int layer;              // レイヤ番号(値が大きいほど上位)
 
     /* コールバック */
-    void (*draw_callback)(int, int);
+    void (*draw_callback)(struct Window *wp, int, int);
+
+    /* 状態保持用 */
+    void *statp;
 
     /* リスト構成情報 */
     struct Window *bef_p;
@@ -26,7 +29,8 @@ void window_new(
     int y0,
     int width,
     int height,
-    void (*draw_callback)(int, int)
+    void (*draw_callback)(Window *wp, int, int),
+    void *statp
 );
 void window_liftup(Window *w_list, Window *target);
 

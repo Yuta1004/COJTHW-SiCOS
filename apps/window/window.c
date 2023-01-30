@@ -38,7 +38,8 @@ void window_new(
     int y0,
     int width,
     int height,
-    void (*draw_callback)(int, int)
+    void (*draw_callback)(Window*, int, int),
+    void *statp
 ) {
     Window *top_window = get_top_window(w_list);
     Window *wp = SYSCALL_M_ALLOC(sizeof(Window));
@@ -47,6 +48,7 @@ void window_new(
     wp->width = width;
     wp->height = height;
     wp->draw_callback = draw_callback;
+    wp->statp = statp;
     wp->layer = top_window->layer+1;
     wp->bef_p = top_window;
     wp->next_p = 0;

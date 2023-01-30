@@ -69,7 +69,7 @@ void draw_window(Window *w_list, int m_xpos[3], int m_ypos[3], int m_zpos[3], in
         // 本体
         draw_set_color(0, 255, 255, 255);
         draw_box(wp->x0+4, wp->y0+54, wp->width, wp->height);
-        wp->draw_callback(wp->x0+4, wp->y0+54);
+        wp->draw_callback(wp, wp->x0+4, wp->y0+54);
     }
 }
 

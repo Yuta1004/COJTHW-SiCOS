@@ -3,7 +3,7 @@
 #include "../window.h"
 #include "cbox.h"
 
-void cboxapp_draw(int x0, int y0) {
+void cboxapp_draw(Window *wp, int x0, int y0) {
     draw_set_brendmode(1);
 
     draw_set_color(128, 255, 0, 0);
@@ -19,5 +19,5 @@ void cboxapp_draw(int x0, int y0) {
 }
 
 void cboxapp_new(Window *w_list) {
-    window_new(w_list, 0, 0, 300, 300, cboxapp_draw);
+    window_new(w_list, 0, 0, 300, 300, cboxapp_draw, 0);
 }
