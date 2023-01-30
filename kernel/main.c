@@ -50,8 +50,14 @@ int main() {
     init_ov9655(OV9655_SXGA);
     uart_printsln("OK");
 
-    // VRAM初期化
-    uart_prints("< STARTUP > Initializing VRAM ... ");
+    // キャプチャ回路設定
+    uart_prints("< STARTUP > Setting Capture PL ... ");
+    camera_addr(0x23000000);
+    camera_on();
+    uart_printsln("OK");
+
+    // 表示回路設定
+    uart_prints("< STARTUP > Setting Display PL ... ");
     DRAW_FRAME({
         draw_set_color(0, 0, 0, 0);
         draw_box(0, 0, 1280, 1024);
