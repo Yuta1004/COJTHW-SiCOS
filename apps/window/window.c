@@ -72,4 +72,20 @@ void window_remove(Window *w_list, Window *target) {
     if (target->next_p != 0) {
         target->next_p->bef_p = target->bef_p;
     }
+
+    if (target->statp != 0) {
+        SYSCALL_M_FREE(target->statp);
+    }
+    SYSCALL_M_FREE(target);
+}
+
+void window_free(Window *w_list) {
+    for (Window *wp = get_top_window(w_list); wp != 0;) {
+        Window *tmpp = wp->bef_p;
+        if (wp->statp != 0) {
+            SYSCALL_M_FREE(wp->statp);
+        }
+        SYSCALL_M_FREE(wp);
+        wp = tmpp;
+    }
 }

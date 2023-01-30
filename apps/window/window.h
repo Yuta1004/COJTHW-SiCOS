@@ -34,5 +34,6 @@ void window_new(
 );
 void window_liftup(Window *w_list, Window *target);
 void window_remove(Window *w_list, Window *target);
+void window_free(Window *w_list);
 
 #endif

@@ -1,3 +1,4 @@
+#include <syscall.h>
 #include <uart.h>
 #include <mouse.h>
 #include <draw.h>
@@ -177,5 +178,7 @@ int main(int argc, char **argv) {
     }
 
 __exit:
+    window_free(w_list);
+
     return 0;
 }
