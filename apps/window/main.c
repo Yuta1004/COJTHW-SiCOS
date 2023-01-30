@@ -102,6 +102,10 @@ int main(int argc, char **argv) {
             queue3_push(m_ypos, tmp_m_ypos);
             queue3_push(m_zpos, tmp_m_zpos);
             queue3_push(m_btn, tmp_m_btn);
+        }
+
+        // 描画
+        if (1) {
             draw(w_list, m_xpos, m_ypos, m_zpos, m_btn);
         }
 
