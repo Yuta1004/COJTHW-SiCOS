@@ -2,9 +2,12 @@
 
 void camera_on(unsigned int addr) {
     CAMCTRL = CAMON;
-    CAMADDR = addr;
 }
 
 void camera_off() {
     CAMCTRL = CAMOFF;
+}
+
+void camera_addr(unsigned int addr) {
+    CAMADDR = addr;
 }

@@ -15,7 +15,8 @@
 #define CAMINTENBL      0x01
 #define CAMINTCLR       0x02
 
-void camera_on(unsigned int addr);
+void camera_on();
 void camera_off();
+void camera_addr(unsigned int addr);
 
 #endif
