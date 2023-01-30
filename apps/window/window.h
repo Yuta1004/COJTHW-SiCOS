@@ -13,6 +13,9 @@ struct Window {
 };
 typedef struct Window Window;
 
+Window *get_top_window(Window *w_list);
+Window *get_clicked_window(Window *w_list, int x, int y);
+
 Window *window_root();
 void window_new(Window *w_list, int x0, int y0, int width, int height);
 

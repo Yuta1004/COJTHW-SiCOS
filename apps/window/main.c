@@ -11,17 +11,8 @@
 }
 
 void draw_background() {
-    DRAW_FRAME({
-        draw_set_stmode(0);
-        draw_set_color(0, 128, 128, 128);
-        draw_box(0, 0, 1280, 1024);
-    });
-
-    DRAW_FRAME({
-        draw_set_stmode(0);
-        draw_set_color(0, 128, 128, 128);
-        draw_box(0, 0, 1280, 1024);
-    });
+    draw_set_color(0, 0, 136, 136);
+    draw_box(0, 0, 1280, 1024);
 }
 
 void draw_mouse(int x[3], int y[3], int z[3], int btn[3]) {
@@ -31,25 +22,55 @@ void draw_mouse(int x[3], int y[3], int z[3], int btn[3]) {
         MOUSE_CLICKED(btn[0], MOUSE_RBTN) ? 255 : 0
     };
 
-    draw_set_stmode(0);
-
-    draw_set_color(0, 128, 128, 128);
-    draw_box(x[2], y[2], 10, 10);
-
     draw_set_color(0, color[0], color[1], color[2]);
     draw_box(x[0], y[0], 10, 10);
 }
 
-void draw_window(Window *w_list) {
+void draw_window(Window *w_list, int m_xpos[3], int m_ypos[3], int m_zpos[3], int m_btn[3]) {
+    // クリック判定
+    if (MOUSE_CLICKED(m_btn[0], MOUSE_LBTN)) {
+        Window *wp = get_clicked_window(w_list, m_xpos[0], m_ypos[0]);
+        if (wp != 0 && MOUSE_CLICKED(m_btn[1], MOUSE_LBTN)) {
+            int dx = m_xpos[0] - m_xpos[1];
+            int dy = m_ypos[0] - m_ypos[1];
+            wp->x0 += dx;
+            wp->y0 += dy;
+        }
+    }
+
+    // 描画処理
     for (Window *wp = w_list->next_p; wp != 0; wp = wp->next_p) {
-        draw_set_color(0, 200, 100, 100);
-        draw_box(wp->x0, wp->y0, wp->width, wp->height);
+        // 影
+        draw_set_color(0, 0, 0, 0);
+        draw_box(wp->x0, wp->y0, wp->width+10, wp->height+60);
+
+        // 枠
+        draw_set_color(0, 128, 128, 128);
+        draw_box(wp->x0, wp->y0, wp->width+8, wp->height+58);
+
+        // ヘッダー
+        draw_set_color(0, 0, 0, 150);
+        draw_box(wp->x0+4, wp->y0+4, wp->width, 46);
+
+        // ボタンもどきの影
+        draw_set_color(0, 0, 0, 0);
+        draw_box(wp->x0+wp->width-40, wp->y0+8, 40, 40);
+
+        // ボタンもどき
+        draw_set_color(0, 128, 128, 128);
+        draw_box(wp->x0+wp->width-40, wp->y0+8, 38, 38);
+
+        // 本体
+        draw_set_color(0, 255, 255, 255);
+        draw_box(wp->x0+4, wp->y0+54, wp->width, wp->height);
     }
 }
 
 void draw(Window *w_list, int m_xpos[3], int m_ypos[3], int m_zpos[3], int m_btn[3]) {
     DRAW_FRAME({
-        draw_window(w_list);
+        draw_set_stmode(0);
+        draw_background();
+        draw_window(w_list, m_xpos, m_ypos, m_zpos, m_btn);
         draw_mouse(m_xpos, m_ypos, m_zpos, m_btn);
     });
 }
@@ -67,7 +88,8 @@ int main(int argc, char **argv) {
 
     // 初期化処理
     mouse_init(MOUSE_SXGA, MOUSE_SPEED_1);
-    draw_background();
+    DRAW_FRAME(draw_background());
+    DRAW_FRAME(draw_background());
 
     while (1) {
         // マウスイベント
@@ -86,7 +108,7 @@ int main(int argc, char **argv) {
                 break;
 
             case 'w':
-                window_new(w_list, 0, 0, 100, 100);
+                window_new(w_list, 0, 0, 300, 300);
                 break;
 
             default:
