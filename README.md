@@ -1,10 +1,11 @@
-# SiCOS
+# COJTHW-SiCOS
 
 **Si**mple **C**OJT **OS**
 
 ## 概要
 
-自作CPU上で動かすOS(もどき)
+自作CPU上で動かす自作OS  
+[自作CPU COJTHW-CPUProj](https://github.com/Yuta1004/COJTHW-CPUProj)
 
 ## コマンド
 
@@ -16,7 +17,7 @@
 
 ビルド用Dockerイメージのシェルを起動
 
-### `make buikld-image`
+### `make build-image`
 
 ビルド用Dockerイメージの生成
 
